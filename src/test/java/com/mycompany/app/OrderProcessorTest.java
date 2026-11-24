@@ -1,6 +1,8 @@
 package com.mycompany.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -22,5 +24,19 @@ class OrderProcessorTest {
     @Test
     void parseQuantityReadsValidNumber() {
         assertEquals(7, processor.parseQuantity("7"));
+    }
+
+    @Test
+    void isPriorityComparesContentNotReference() {
+        String runtimeValue = new StringBuilder("PRIORITY").toString();
+        assertTrue(processor.isPriority(runtimeValue));
+        assertFalse(processor.isPriority("STANDARD"));
+        assertFalse(processor.isPriority(null));
+    }
+
+    @Test
+    void nameLengthHandlesNullAndTrimsWhitespace() {
+        assertEquals(0, processor.nameLength(null));
+        assertEquals(3, processor.nameLength("  Bob "));
     }
 }

@@ -32,7 +32,7 @@ public class OrderProcessor {
     }
 
     public boolean isPriority(String level) {
-        return level == "PRIORITY";
+        return "PRIORITY".equals(level);
     }
 
     public int parseQuantity(String text) {
@@ -44,11 +44,10 @@ public class OrderProcessor {
     }
 
     public int nameLength(String name) {
-        String trimmed = null;
-        if (name != null) {
-            trimmed = name.trim();
+        if (name == null) {
+            return 0;
         }
-        return trimmed.length();
+        return name.trim().length();
     }
 
     public void printReceipt(double total) {
